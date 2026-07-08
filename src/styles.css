@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&display=swap');
+
+:root {
+  color: #18201f;
+  background: #e9ebdc;
+  font-family: 'Instrument Sans', 'Avenir Next', sans-serif;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  --ink: #18201f;
+  --paper: #f7f4e8;
+  --field: #dfe8df;
+  --accent: #d4572a;
+  --accent-ink: #fffaf0;
+  --line: rgba(24, 32, 31, 0.16);
+  --shadow: 0 24px 70px rgba(43, 57, 49, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  align-items: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(212, 87, 42, 0.16), transparent 28rem),
+    linear-gradient(135deg, #f2e2cd 0%, #e9ebdc 48%, #c9dace 100%);
+  display: flex;
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 3.5rem);
+}
+
+.workbench {
+  background: color-mix(in srgb, var(--paper) 88%, white 12%);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 980px;
+  padding: clamp(0.9rem, 2vw, 1.4rem);
+  width: min(100%, 980px);
+}
+
+.toolbar,
+.status-row {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0 0 0.15rem;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 5vw, 3.8rem);
+  letter-spacing: 0;
+  line-height: 0.92;
+  margin: 0;
+}
+
+.segmented-control {
+  background: #ece5d4;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(3rem, 1fr));
+  padding: 0.25rem;
+}
+
+.segmented-control button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 2.5rem;
+  padding: 0 0.85rem;
+}
+
+.segmented-control button.is-active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.frame-rotator {
+  align-items: center;
+  aspect-ratio: 16 / 10;
+  background:
+    linear-gradient(90deg, rgba(24, 32, 31, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(24, 32, 31, 0.08) 1px, transparent 1px),
+    var(--field);
+  background-size: 36px 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: grab;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  width: 100%;
+}
+
+.frame-rotator:active {
+  cursor: grabbing;
+}
+
+.frame-rotator:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 70%, white 30%);
+  outline-offset: 4px;
+}
+
+.frame-rotator img {
+  display: block;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  width: 100%;
+}
+
+.status-row {
+  color: rgba(24, 32, 31, 0.68);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .segmented-control {
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+  }
+
+  .workbench {
+    gap: 0.8rem;
+  }
+}
