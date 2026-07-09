@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FrameRotator } from './FrameRotator.jsx';
 
-const sourceFrameCount = 48;
+const sourceFrameCount = 24;
 const rotationOptions = [5, 8, 12, 24, 48];
 
 export default function App() {
@@ -33,7 +33,7 @@ export default function App() {
         <FrameRotator
           className="hero-rotator"
           dragDirection={1}
-          fileExtension="jpg"
+          fileExtension="webp"
           filePrefix="frame"
           releaseGlideFrames={4}
           releaseGlideMs={180}

@@ -102,7 +102,7 @@ h1 {
 
 .frame-rotator {
   align-items: center;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   background:
     linear-gradient(90deg, rgba(24, 32, 31, 0.08) 1px, transparent 1px),
     linear-gradient(0deg, rgba(24, 32, 31, 0.08) 1px, transparent 1px),
@@ -113,10 +113,12 @@ h1 {
   cursor: grab;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-height: 200px;
   overflow: hidden;
   touch-action: pan-y;
   user-select: none;
-  width: 100%;
+  width: min(100%, 200px);
 }
 
 .frame-rotator:active {
@@ -132,7 +134,7 @@ h1 {
   display: block;
   height: 100%;
   max-width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   pointer-events: none;
   width: 100%;
 }

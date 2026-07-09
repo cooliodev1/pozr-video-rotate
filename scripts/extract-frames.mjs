@@ -8,10 +8,10 @@ const defaults = {
   input: 'input.mp4',
   output: 'public/frames',
   count: 24,
-  format: 'jpg',
-  quality: 3,
+  format: 'webp',
+  quality: 80,
   prefix: 'frame',
-  width: 960,
+  width: 320,
   start: 0,
   force: false,
 };
@@ -138,7 +138,7 @@ function extractFrame({ inputPath, outputDir, outputFile, timestamp, quality, wi
   ];
 
   if (width > 0) {
-    args.push('-vf', `scale=${width}:-1`);
+    args.push('-vf', `scale=${width}:${width}:force_original_aspect_ratio=decrease`);
   }
 
   if (format !== 'png') {

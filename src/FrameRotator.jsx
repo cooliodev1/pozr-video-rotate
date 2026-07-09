@@ -33,7 +33,7 @@ export function FrameRotator({
   className = '',
   dragDirection = 1,
   dragPixelsPerFrame = 16,
-  fileExtension = 'jpg',
+  fileExtension = 'webp',
   filePrefix = 'frame',
   frameUrls,
   loop = true,
@@ -205,6 +205,10 @@ export function FrameRotator({
     }
   }
 
+  function handleDoubleClick() {
+    moveToPosition(0, true);
+  }
+
   function handleKeyDown(event) {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
@@ -224,6 +228,7 @@ export function FrameRotator({
       aria-valuemin={1}
       aria-valuenow={frameIndex + 1}
       className={`frame-rotator ${className}`}
+      onDoubleClick={handleDoubleClick}
       onKeyDown={handleKeyDown}
       onPointerCancel={handlePointerUp}
       onPointerDown={handlePointerDown}
