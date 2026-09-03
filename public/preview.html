@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><style>
+body { background: #333; font-family: sans-serif; color: white; }
+.row { display: flex; gap: 20px; padding: 20px; flex-wrap: wrap; }
+.item { text-align: center; }
+img { max-height: 400px; background: repeating-conic-gradient(#444 0% 25%, #555 0% 50%) 0 0 / 20px 20px; }
+</style></head>
+<body>
+<h2 style="padding:20px">Pedestal Removal Test</h2>
+<div class="row">
+  <div class="item"><p>frame-10 ORIGINAL</p><img src="new1-nobg/frame-10.png"></div>
+  <div class="item"><p>frame-10 PROCESSED</p><img src="test_frame-10.png"></div>
+  <div class="item"><p>frame-24 ORIGINAL</p><img src="new1-nobg/frame-24.png"></div>
+  <div class="item"><p>frame-24 PROCESSED</p><img src="test_frame-24.png"></div>
+  <div class="item"><p>frame-01 ORIGINAL (no pedestal)</p><img src="new1-nobg/frame-01.png"></div>
+  <div class="item"><p>frame-01 PROCESSED (should be same)</p><img src="test_frame-01.png"></div>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import { mkdirSync, rmSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { basename, extname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import ffmpegPath from 'ffmpeg-static';
@@ -12,7 +12,12 @@ const defaults = {
   quality: 80,
   prefix: 'frame',
   width: 320,
+  crop: '',
   start: 0,
+  end: null,
+  startAngle: 0,
+  direction: 'clockwise',
+  timestamps: '',
   force: false,
 };
 
@@ -28,7 +33,11 @@ Options:
   --quality <number>  ffmpeg quality value for jpg/webp. Lower is better. Default: 3
   --prefix <name>     Output filename prefix. Default: frame
   --width <pixels>    Resize frames to this width. Use 0 for original size. Default: 960
-  --start <seconds>   Skip this many seconds before sampling. Default: 0
+  --start <seconds>   Timestamp of the calibrated 0-degree pose. Default: 0
+  --end <seconds>     Exclusive timestamp where the pose completes 360 degrees. Default: video end
+  --start-angle <degrees>  Model yaw represented by the first frame. Default: 0
+  --direction <clockwise|counterclockwise>  Angle order in the output. Default: clockwise
+  --timestamps <seconds>  Comma-separated timestamp for each angle; overrides even sampling
   --force             Empty the output folder before writing frames
 `;
 
@@ -62,8 +71,10 @@ function parseArgs(argv) {
 
     index += 1;
 
-    if (['count', 'quality', 'width', 'start'].includes(key)) {
+    if (['count', 'quality', 'width', 'start', 'end'].includes(key)) {
       options[key] = Number(value);
+    } else if (key === 'start-angle') {
+      options.startAngle = Number(value);
     } else {
       options[key] = value;
     }
@@ -119,6 +130,50 @@ function validateOptions(options) {
   if (!Number.isFinite(options.start) || options.start < 0) {
     throw new Error('--start must be 0 or a positive number');
   }
+
+  if (options.end !== null && (!Number.isFinite(options.end) || options.end <= options.start)) {
+    throw new Error('--end must be greater than --start');
+  }
+
+  if (!Number.isFinite(options.startAngle)) {
+    throw new Error('--start-angle must be a number');
+  }
+
+  if (!['clockwise', 'counterclockwise'].includes(options.direction)) {
+    throw new Error('--direction must be clockwise or counterclockwise');
+  }
+}
+
+function normalizeAngle(angle) {
+  return ((angle % 360) + 360) % 360;
+}
+
+function getTimestamps(options, duration) {
+  if (!options.timestamps) {
+    const end = options.end ?? duration;
+    const usableDuration = end - options.start;
+
+    return Array.from(
+      { length: options.count },
+      (_, index) => options.start + (usableDuration * index) / options.count,
+    );
+  }
+
+  const timestamps = options.timestamps.split(',').map(Number);
+
+  if (timestamps.length !== options.count || timestamps.some((timestamp) => !Number.isFinite(timestamp))) {
+    throw new Error('--timestamps must contain exactly --count comma-separated numbers');
+  }
+
+  if (timestamps.some((timestamp) => timestamp < 0 || timestamp >= duration)) {
+    throw new Error(`Each --timestamps value must be within the video (0-${duration.toFixed(3)}s)`);
+  }
+
+  if (timestamps.some((timestamp, index) => index > 0 && timestamp <= timestamps[index - 1])) {
+    throw new Error('--timestamps values must be in ascending order');
+  }
+
+  return timestamps;
 }
 
 function frameName(prefix, index, total, format) {
@@ -126,7 +181,7 @@ function frameName(prefix, index, total, format) {
   return `${prefix}-${String(index + 1).padStart(digits, '0')}.${format === 'jpeg' ? 'jpg' : format}`;
 }
 
-function extractFrame({ inputPath, outputDir, outputFile, timestamp, quality, width, format }) {
+function extractFrame({ inputPath, outputDir, outputFile, timestamp, quality, width, crop, format }) {
   const args = [
     '-y',
     '-ss',
@@ -137,9 +192,10 @@ function extractFrame({ inputPath, outputDir, outputFile, timestamp, quality, wi
     '1',
   ];
 
-  if (width > 0) {
-    args.push('-vf', `scale=${width}:${width}:force_original_aspect_ratio=decrease`);
-  }
+  const filters = [];
+  if (crop) filters.push(`crop=${crop}`);
+  if (width > 0) filters.push(`scale=${width}:-2`);
+  if (filters.length > 0) args.push('-vf', filters.join(','));
 
   if (format !== 'png') {
     args.push('-q:v', String(quality));
@@ -156,8 +212,17 @@ function main() {
   const inputPath = resolve(options.input);
   const outputDir = resolve(options.output);
   const duration = getDuration(inputPath);
-  const start = Math.min(options.start, Math.max(duration - 0.001, 0));
-  const usableDuration = Math.max(duration - start, 0.001);
+  const end = options.end ?? duration;
+
+  if (options.start >= duration) {
+    throw new Error(`--start must be before the video end (${duration.toFixed(3)}s)`);
+  }
+
+  if (end > duration) {
+    throw new Error(`--end must not exceed the video duration (${duration.toFixed(3)}s)`);
+  }
+
+  const timestamps = getTimestamps(options, duration);
 
   if (options.force) {
     rmSync(outputDir, { recursive: true, force: true });
@@ -167,9 +232,12 @@ function main() {
 
   const sourceName = basename(inputPath, extname(inputPath));
   const prefix = options.prefix || sourceName || defaults.prefix;
+  const angleDirection = options.direction === 'clockwise' ? 1 : -1;
+  const frames = [];
 
   for (let index = 0; index < options.count; index += 1) {
-    const timestamp = start + (usableDuration * index) / options.count;
+    const timestamp = timestamps[index];
+    const angle = normalizeAngle(options.startAngle + angleDirection * (360 * index) / options.count);
     const outputFile = frameName(prefix, index, options.count, options.format);
 
     extractFrame({
@@ -179,13 +247,26 @@ function main() {
       timestamp,
       quality: options.quality,
       width: options.width,
+      crop: options.crop,
       format: options.format,
     });
 
-    console.log(`${String(index + 1).padStart(String(options.count).length, '0')}/${options.count} ${outputFile} @ ${timestamp.toFixed(3)}s`);
+    frames.push({ file: outputFile, angle, timestamp });
+    console.log(`${String(index + 1).padStart(String(options.count).length, '0')}/${options.count} ${outputFile} @ ${timestamp.toFixed(3)}s = ${angle.toFixed(2)}deg`);
   }
 
-  console.log(`Done. Wrote ${options.count} frames to ${outputDir}`);
+  writeFileSync(resolve(outputDir, 'rotation.json'), `${JSON.stringify({
+    source: basename(inputPath),
+    start: options.start,
+    end,
+    direction: options.direction,
+    sampling: options.timestamps ? 'calibrated-timestamps' : 'even-time',
+    frameCount: options.count,
+    degreesPerFrame: 360 / options.count,
+    frames,
+  }, null, 2)}\n`);
+
+  console.log(`Done. Wrote ${options.count} frames and rotation.json to ${outputDir}`);
 }
 
 try {

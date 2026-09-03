@@ -1,0 +1,251 @@
+{
+  "source": "jake.mp4",
+  "start": 0,
+  "end": 10.006,
+  "direction": "clockwise",
+  "sampling": "even-time",
+  "frameCount": 48,
+  "degreesPerFrame": 7.5,
+  "frames": [
+    {
+      "file": "frame-01.webp",
+      "angle": 0,
+      "timestamp": 0
+    },
+    {
+      "file": "frame-02.webp",
+      "angle": 7.5,
+      "timestamp": 0.20845833333333333
+    },
+    {
+      "file": "frame-03.webp",
+      "angle": 15,
+      "timestamp": 0.41691666666666666
+    },
+    {
+      "file": "frame-04.webp",
+      "angle": 22.5,
+      "timestamp": 0.625375
+    },
+    {
+      "file": "frame-05.webp",
+      "angle": 30,
+      "timestamp": 0.8338333333333333
+    },
+    {
+      "file": "frame-06.webp",
+      "angle": 37.5,
+      "timestamp": 1.0422916666666666
+    },
+    {
+      "file": "frame-07.webp",
+      "angle": 45,
+      "timestamp": 1.25075
+    },
+    {
+      "file": "frame-08.webp",
+      "angle": 52.5,
+      "timestamp": 1.4592083333333334
+    },
+    {
+      "file": "frame-09.webp",
+      "angle": 60,
+      "timestamp": 1.6676666666666666
+    },
+    {
+      "file": "frame-10.webp",
+      "angle": 67.5,
+      "timestamp": 1.876125
+    },
+    {
+      "file": "frame-11.webp",
+      "angle": 75,
+      "timestamp": 2.0845833333333332
+    },
+    {
+      "file": "frame-12.webp",
+      "angle": 82.5,
+      "timestamp": 2.293041666666667
+    },
+    {
+      "file": "frame-13.webp",
+      "angle": 90,
+      "timestamp": 2.5015
+    },
+    {
+      "file": "frame-14.webp",
+      "angle": 97.5,
+      "timestamp": 2.7099583333333332
+    },
+    {
+      "file": "frame-15.webp",
+      "angle": 105,
+      "timestamp": 2.918416666666667
+    },
+    {
+      "file": "frame-16.webp",
+      "angle": 112.5,
+      "timestamp": 3.126875
+    },
+    {
+      "file": "frame-17.webp",
+      "angle": 120,
+      "timestamp": 3.3353333333333333
+    },
+    {
+      "file": "frame-18.webp",
+      "angle": 127.5,
+      "timestamp": 3.543791666666667
+    },
+    {
+      "file": "frame-19.webp",
+      "angle": 135,
+      "timestamp": 3.75225
+    },
+    {
+      "file": "frame-20.webp",
+      "angle": 142.5,
+      "timestamp": 3.9607083333333333
+    },
+    {
+      "file": "frame-21.webp",
+      "angle": 150,
+      "timestamp": 4.1691666666666665
+    },
+    {
+      "file": "frame-22.webp",
+      "angle": 157.5,
+      "timestamp": 4.377625
+    },
+    {
+      "file": "frame-23.webp",
+      "angle": 165,
+      "timestamp": 4.586083333333334
+    },
+    {
+      "file": "frame-24.webp",
+      "angle": 172.5,
+      "timestamp": 4.7945416666666665
+    },
+    {
+      "file": "frame-25.webp",
+      "angle": 180,
+      "timestamp": 5.003
+    },
+    {
+      "file": "frame-26.webp",
+      "angle": 187.5,
+      "timestamp": 5.211458333333334
+    },
+    {
+      "file": "frame-27.webp",
+      "angle": 195,
+      "timestamp": 5.4199166666666665
+    },
+    {
+      "file": "frame-28.webp",
+      "angle": 202.5,
+      "timestamp": 5.628375000000001
+    },
+    {
+      "file": "frame-29.webp",
+      "angle": 210,
+      "timestamp": 5.836833333333334
+    },
+    {
+      "file": "frame-30.webp",
+      "angle": 217.5,
+      "timestamp": 6.0452916666666665
+    },
+    {
+      "file": "frame-31.webp",
+      "angle": 225,
+      "timestamp": 6.25375
+    },
+    {
+      "file": "frame-32.webp",
+      "angle": 232.5,
+      "timestamp": 6.462208333333334
+    },
+    {
+      "file": "frame-33.webp",
+      "angle": 240,
+      "timestamp": 6.6706666666666665
+    },
+    {
+      "file": "frame-34.webp",
+      "angle": 247.5,
+      "timestamp": 6.879124999999999
+    },
+    {
+      "file": "frame-35.webp",
+      "angle": 255,
+      "timestamp": 7.087583333333334
+    },
+    {
+      "file": "frame-36.webp",
+      "angle": 262.5,
+      "timestamp": 7.296041666666667
+    },
+    {
+      "file": "frame-37.webp",
+      "angle": 270,
+      "timestamp": 7.5045
+    },
+    {
+      "file": "frame-38.webp",
+      "angle": 277.5,
+      "timestamp": 7.712958333333333
+    },
+    {
+      "file": "frame-39.webp",
+      "angle": 285,
+      "timestamp": 7.9214166666666666
+    },
+    {
+      "file": "frame-40.webp",
+      "angle": 292.5,
+      "timestamp": 8.129875
+    },
+    {
+      "file": "frame-41.webp",
+      "angle": 300,
+      "timestamp": 8.338333333333333
+    },
+    {
+      "file": "frame-42.webp",
+      "angle": 307.5,
+      "timestamp": 8.546791666666666
+    },
+    {
+      "file": "frame-43.webp",
+      "angle": 315,
+      "timestamp": 8.75525
+    },
+    {
+      "file": "frame-44.webp",
+      "angle": 322.5,
+      "timestamp": 8.963708333333335
+    },
+    {
+      "file": "frame-45.webp",
+      "angle": 330,
+      "timestamp": 9.172166666666667
+    },
+    {
+      "file": "frame-46.webp",
+      "angle": 337.5,
+      "timestamp": 9.380625
+    },
+    {
+      "file": "frame-47.webp",
+      "angle": 345,
+      "timestamp": 9.589083333333333
+    },
+    {
+      "file": "frame-48.webp",
+      "angle": 352.5,
+      "timestamp": 9.797541666666667
+    }
+  ]
+}

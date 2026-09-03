@@ -12,15 +12,19 @@ function clampValue(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function getFrameNumber(stepIndex, totalFrames, rotationSteps) {
-  return Math.floor((stepIndex * totalFrames) / rotationSteps) + 1;
+function getSourceFrameIndex(stepIndex, totalFrames, rotationSteps) {
+  return Math.round((stepIndex * totalFrames) / rotationSteps) % totalFrames;
+}
+
+function normalizeAngle(angle) {
+  return ((angle % 360) + 360) % 360;
 }
 
 function buildFrameUrls({ basePath, fileExtension, filePrefix, totalFrames, rotationSteps }) {
   const digits = Math.max(2, String(totalFrames).length);
 
   return Array.from({ length: rotationSteps }, (_, index) => {
-    const frameNumber = getFrameNumber(index, totalFrames, rotationSteps);
+    const frameNumber = getSourceFrameIndex(index, totalFrames, rotationSteps) + 1;
     const paddedFrame = String(frameNumber).padStart(digits, '0');
 
     return `${basePath}/${filePrefix}-${paddedFrame}.${fileExtension}`;
@@ -38,11 +42,14 @@ export function FrameRotator({
   frameUrls,
   loop = true,
   maxReleaseFrames = 12,
+  onRotationChange,
   releaseGlideFrames = 4,
   releaseGlideMs = 180,
+  rotationDirection = 'clockwise',
   rotationSteps = 8,
   smoothing = 0.22,
   smoothDrag = true,
+  startAngle = 0,
   totalFrames = 24,
 }) {
   const frames = useMemo(
@@ -57,6 +64,12 @@ export function FrameRotator({
   const dragState = useRef({ active: false, lastTime: 0, lastX: 0, releaseDirection: 0, startPosition: 0, startX: 0, velocity: 0 });
   const targetPosition = useRef(0);
   const frameCount = frames.length;
+  const sourceFrameCount = frameUrls?.length || totalFrames;
+  const sourceFrameIndex = frameUrls?.length
+    ? frameIndex
+    : getSourceFrameIndex(frameIndex, totalFrames, rotationSteps);
+  const angleDirection = rotationDirection === 'clockwise' ? 1 : -1;
+  const angle = normalizeAngle(startAngle + angleDirection * (360 * sourceFrameIndex) / sourceFrameCount);
 
   useEffect(() => {
     frames.forEach((src) => {
@@ -75,6 +88,10 @@ export function FrameRotator({
       }
     };
   }, [frames, frameCount]);
+
+  useEffect(() => {
+    onRotationChange?.({ angle, frameIndex: sourceFrameIndex, src: frames[frameIndex] });
+  }, [angle, frameIndex, frames, onRotationChange, sourceFrameIndex]);
 
   function resolveIndex(index) {
     return loop ? wrapIndex(index, frameCount) : clampIndex(index, frameCount);
@@ -227,7 +244,9 @@ export function FrameRotator({
       aria-valuemax={frameCount}
       aria-valuemin={1}
       aria-valuenow={frameIndex + 1}
+      aria-valuetext={`${angle.toFixed(2)} degrees`}
       className={`frame-rotator ${className}`}
+      data-angle={angle}
       onDoubleClick={handleDoubleClick}
       onKeyDown={handleKeyDown}
       onPointerCancel={handlePointerUp}

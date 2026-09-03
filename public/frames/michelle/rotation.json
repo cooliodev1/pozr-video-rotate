@@ -1,0 +1,251 @@
+{
+  "source": "michelle.mp4",
+  "start": 0,
+  "end": 6,
+  "direction": "clockwise",
+  "sampling": "even-time",
+  "frameCount": 48,
+  "degreesPerFrame": 7.5,
+  "frames": [
+    {
+      "file": "frame-01.webp",
+      "angle": 0,
+      "timestamp": 0
+    },
+    {
+      "file": "frame-02.webp",
+      "angle": 7.5,
+      "timestamp": 0.125
+    },
+    {
+      "file": "frame-03.webp",
+      "angle": 15,
+      "timestamp": 0.25
+    },
+    {
+      "file": "frame-04.webp",
+      "angle": 22.5,
+      "timestamp": 0.375
+    },
+    {
+      "file": "frame-05.webp",
+      "angle": 30,
+      "timestamp": 0.5
+    },
+    {
+      "file": "frame-06.webp",
+      "angle": 37.5,
+      "timestamp": 0.625
+    },
+    {
+      "file": "frame-07.webp",
+      "angle": 45,
+      "timestamp": 0.75
+    },
+    {
+      "file": "frame-08.webp",
+      "angle": 52.5,
+      "timestamp": 0.875
+    },
+    {
+      "file": "frame-09.webp",
+      "angle": 60,
+      "timestamp": 1
+    },
+    {
+      "file": "frame-10.webp",
+      "angle": 67.5,
+      "timestamp": 1.125
+    },
+    {
+      "file": "frame-11.webp",
+      "angle": 75,
+      "timestamp": 1.25
+    },
+    {
+      "file": "frame-12.webp",
+      "angle": 82.5,
+      "timestamp": 1.375
+    },
+    {
+      "file": "frame-13.webp",
+      "angle": 90,
+      "timestamp": 1.5
+    },
+    {
+      "file": "frame-14.webp",
+      "angle": 97.5,
+      "timestamp": 1.625
+    },
+    {
+      "file": "frame-15.webp",
+      "angle": 105,
+      "timestamp": 1.75
+    },
+    {
+      "file": "frame-16.webp",
+      "angle": 112.5,
+      "timestamp": 1.875
+    },
+    {
+      "file": "frame-17.webp",
+      "angle": 120,
+      "timestamp": 2
+    },
+    {
+      "file": "frame-18.webp",
+      "angle": 127.5,
+      "timestamp": 2.125
+    },
+    {
+      "file": "frame-19.webp",
+      "angle": 135,
+      "timestamp": 2.25
+    },
+    {
+      "file": "frame-20.webp",
+      "angle": 142.5,
+      "timestamp": 2.375
+    },
+    {
+      "file": "frame-21.webp",
+      "angle": 150,
+      "timestamp": 2.5
+    },
+    {
+      "file": "frame-22.webp",
+      "angle": 157.5,
+      "timestamp": 2.625
+    },
+    {
+      "file": "frame-23.webp",
+      "angle": 165,
+      "timestamp": 2.75
+    },
+    {
+      "file": "frame-24.webp",
+      "angle": 172.5,
+      "timestamp": 2.875
+    },
+    {
+      "file": "frame-25.webp",
+      "angle": 180,
+      "timestamp": 3
+    },
+    {
+      "file": "frame-26.webp",
+      "angle": 187.5,
+      "timestamp": 3.125
+    },
+    {
+      "file": "frame-27.webp",
+      "angle": 195,
+      "timestamp": 3.25
+    },
+    {
+      "file": "frame-28.webp",
+      "angle": 202.5,
+      "timestamp": 3.375
+    },
+    {
+      "file": "frame-29.webp",
+      "angle": 210,
+      "timestamp": 3.5
+    },
+    {
+      "file": "frame-30.webp",
+      "angle": 217.5,
+      "timestamp": 3.625
+    },
+    {
+      "file": "frame-31.webp",
+      "angle": 225,
+      "timestamp": 3.75
+    },
+    {
+      "file": "frame-32.webp",
+      "angle": 232.5,
+      "timestamp": 3.875
+    },
+    {
+      "file": "frame-33.webp",
+      "angle": 240,
+      "timestamp": 4
+    },
+    {
+      "file": "frame-34.webp",
+      "angle": 247.5,
+      "timestamp": 4.125
+    },
+    {
+      "file": "frame-35.webp",
+      "angle": 255,
+      "timestamp": 4.25
+    },
+    {
+      "file": "frame-36.webp",
+      "angle": 262.5,
+      "timestamp": 4.375
+    },
+    {
+      "file": "frame-37.webp",
+      "angle": 270,
+      "timestamp": 4.5
+    },
+    {
+      "file": "frame-38.webp",
+      "angle": 277.5,
+      "timestamp": 4.625
+    },
+    {
+      "file": "frame-39.webp",
+      "angle": 285,
+      "timestamp": 4.75
+    },
+    {
+      "file": "frame-40.webp",
+      "angle": 292.5,
+      "timestamp": 4.875
+    },
+    {
+      "file": "frame-41.webp",
+      "angle": 300,
+      "timestamp": 5
+    },
+    {
+      "file": "frame-42.webp",
+      "angle": 307.5,
+      "timestamp": 5.125
+    },
+    {
+      "file": "frame-43.webp",
+      "angle": 315,
+      "timestamp": 5.25
+    },
+    {
+      "file": "frame-44.webp",
+      "angle": 322.5,
+      "timestamp": 5.375
+    },
+    {
+      "file": "frame-45.webp",
+      "angle": 330,
+      "timestamp": 5.5
+    },
+    {
+      "file": "frame-46.webp",
+      "angle": 337.5,
+      "timestamp": 5.625
+    },
+    {
+      "file": "frame-47.webp",
+      "angle": 345,
+      "timestamp": 5.75
+    },
+    {
+      "file": "frame-48.webp",
+      "angle": 352.5,
+      "timestamp": 5.875
+    }
+  ]
+}
